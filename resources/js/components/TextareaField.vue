@@ -59,6 +59,6 @@ const inputClasses = computed(() => {
     <slot name="extra"></slot>
 
     <p v-if="helperText" class="mt-2 text-sm text-gray-500">{{ helperText }}</p>
-    <p v-if="error" class="mt-2 text-sm text-red-600">{{ error }}</p>
+    <p v-if="error" class="mt-2 text-sm text-red-600">{{ error[0] }}</p>
   </div>
 </template>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('duration')->comment('Duration in minutes')->default(60);
             $table->boolean('is_active')->default(true);
             $table->jsonb('settings')->nullable()->comment('For service-specific configuration');
+            $table->foreignId('service_category_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

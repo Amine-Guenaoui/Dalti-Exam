@@ -7,6 +7,10 @@ import TextareaField from "@/Components/TextareaField.vue";
 
 // Props
 const props = defineProps({
+  categories: {
+    type: Object,
+    required: true,
+  },
   service: {
     type: Object,
     default: null,
@@ -15,7 +19,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  errors: Object,
 });
 
 const emit = defineEmits(["success"]);
@@ -27,17 +30,9 @@ const form = useForm({
   description: props.service?.description || "",
   duration: props.service?.duration_minutes || 60,
   price: props.service?.price || 0,
-  category: props.service?.category || "consultation",
+  category: props.service?.category || "0",
   is_active: props.service?.is_active ?? true,
 });
-
-// Categories for the select dropdown
-const categories = [
-  { id: "cleaning", name: "Cleaning" },
-  { id: "consultation", name: "Consultation" },
-  { id: "treatment", name: "Treatment" },
-  { id: "maintenance", name: "Maintenance" },
-];
 
 // Duration presets
 const durationPresets = [
@@ -75,7 +70,7 @@ const submit = () => {
         label="Service Name"
         name="name"
         id="name"
-        :error="errors?.name"
+        :error="form.errors.name"
         wrapperClass="sm:col-span-2"
       />
 
@@ -97,9 +92,10 @@ const submit = () => {
             v-model="form.category"
             id="category"
             name="category"
-            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md bg-white px-[14px] py-[10px]"
+            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md bg-white px-[14px] py-[10px]"
             :class="{ 'border-red-500': form.errors.category }"
           >
+            <option value="0" select disabled>-- Select a category --</option>
             <option
               v-for="category in categories"
               :key="category.id"
@@ -110,7 +106,7 @@ const submit = () => {
           </select>
         </div>
         <p v-if="form.errors.category" class="mt-2 text-sm text-red-600">
-          {{ form.errors.category }}
+          {{ form.errors.category[0] }}
         </p>
       </div>
 

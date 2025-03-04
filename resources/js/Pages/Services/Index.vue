@@ -1,55 +1,23 @@
 <script setup>
 import { ref } from "vue";
 import { Link, router } from "@inertiajs/vue3";
-// import Layout from '@/Layouts/Layout.vue';
 import ServiceTable from "@/Components/ServiceTable.vue";
 import ServiceFilter from "@/Components/ServiceFilter.vue";
-// import Modal from '@/Components/Modal.vue';
 
 const props = defineProps({
   services: {
     type: Object,
     required: true,
   },
+  categories: {
+    type: Object,
+    required: false,
+  },
   filters: {
     type: Object,
     default: () => ({}),
   },
 });
-
-const showCreateModal = ref(false);
-const showEditModal = ref(false);
-const showDeleteModal = ref(false);
-const currentService = ref(null);
-
-const openCreateModal = () => {
-  showCreateModal.value = true;
-};
-
-const openEditModal = (service) => {
-  currentService.value = service;
-  showEditModal.value = true;
-};
-
-const openDeleteModal = (service) => {
-  currentService.value = service;
-  showDeleteModal.value = true;
-};
-
-const handleDelete = () => {
-  router.delete(route("services.destroy", currentService.value.id), {
-    onSuccess: () => {
-      showDeleteModal.value = false;
-    },
-  });
-};
-
-const closeModals = () => {
-  showCreateModal.value = false;
-  showEditModal.value = false;
-  showDeleteModal.value = false;
-  currentService.value = null;
-};
 </script>
 
 <template>
@@ -83,20 +51,7 @@ const closeModals = () => {
     </div>
   </div>
 
-  <ServiceFilter :filters="filters" class="mb-6" />
+  <ServiceFilter :categories="categories" :filters="filters" class="mb-5" />
 
-  <ServiceTable :services="services" @edit="openEditModal" @delete="openDeleteModal" />
-
-  <!-- Edit Service Modal -->
-  <!-- <Modal :show="showEditModal" @close="closeModals" maxWidth="2xl">
-      <div class="p-6">
-        <h2 class="text-lg font-medium text-gray-900 mb-4">Edit Service</h2>
-        <ServiceForm
-          v-if="currentService"
-          :service="currentService"
-          :is-update="true"
-          @success="closeModals"
-        />
-      </div>
-    </Modal> -->
+  <ServiceTable :services="services" />
 </template>

@@ -121,7 +121,9 @@ const formatDuration = (minutes) => {
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ service.category }}</div>
+                <div class="text-sm text-gray-900">
+                  {{ service.service_category.name }}
+                </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <div class="flex justify-end space-x-2">

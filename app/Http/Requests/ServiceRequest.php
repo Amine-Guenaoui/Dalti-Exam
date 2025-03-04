@@ -25,9 +25,9 @@ class ServiceRequest extends FormRequest
             'name' => 'required|string|max:255',
             'slug_name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:1',
             'duration' => 'required|integer|min:1',
-            'category' => 'required|string',
+            'category' => 'required|in:service_categories',
             'is_active' => 'boolean',
             'settings' => 'nullable|array',
         ];

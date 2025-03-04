@@ -5,6 +5,11 @@ import debounce from "lodash/debounce";
 import InputField from "@/Components/InputField.vue";
 
 const props = defineProps({
+  categories: {
+    type: Object,
+    // default: null,
+    required: false,
+  },
   filters: {
     type: Object,
     default: () => ({
@@ -18,15 +23,6 @@ const props = defineProps({
 const search = ref(props.filters.search || "");
 const category = ref(props.filters.category || "");
 const status = ref(props.filters.status || "");
-
-// Categories could be fetched from the backend as well
-const categories = [
-  { id: "", name: "All Categories" },
-  { id: "cleaning", name: "Cleaning" },
-  { id: "consultation", name: "Consultation" },
-  { id: "treatment", name: "Treatment" },
-  { id: "maintenance", name: "Maintenance" },
-];
 
 const statuses = [
   { id: "", name: "All Statuses" },
@@ -81,6 +77,7 @@ const resetFilters = () => {
           name="category"
           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
+          <option value="all">All</option>
           <option
             v-for="categoryOption in categories"
             :key="categoryOption.id"
