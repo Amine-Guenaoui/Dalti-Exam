@@ -14,7 +14,7 @@ const props = defineProps({
     type: Object,
     default: () => ({
       search: "",
-      category: "",
+      category: "all",
       status: "",
     }),
   },
@@ -75,9 +75,9 @@ const resetFilters = () => {
           v-model="category"
           id="category"
           name="category"
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          class="mt-1 block w-full border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-[14px] py-[10px]"
         >
-          <option value="all">All</option>
+          <option value="all">All categories</option>
           <option
             v-for="categoryOption in categories"
             :key="categoryOption.id"
@@ -94,7 +94,7 @@ const resetFilters = () => {
           v-model="status"
           id="status"
           name="status"
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          class="mt-1 block w-full border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-[14px] py-[10px]"
         >
           <option
             v-for="statusOption in statuses"

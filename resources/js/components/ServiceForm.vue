@@ -30,7 +30,7 @@ const form = useForm({
   description: props.service?.description || "",
   duration: props.service?.duration_minutes || 60,
   price: props.service?.price || 0,
-  category: props.service?.category || "0",
+  service_category_id: props.service?.service_category_id || "0",
   is_active: props.service?.is_active ?? true,
 });
 
@@ -89,13 +89,13 @@ const submit = () => {
         >
         <div class="mt-1">
           <select
-            v-model="form.category"
+            v-model="form.service_category_id"
             id="category"
             name="category"
             class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md bg-white px-[14px] py-[10px]"
-            :class="{ 'border-red-500': form.errors.category }"
+            :class="{ 'border-red-500': form.errors.service_category_id }"
           >
-            <option value="0" select disabled>-- Select a category --</option>
+            <option value="0" disabled>-- Select a category --</option>
             <option
               v-for="category in categories"
               :key="category.id"
@@ -105,8 +105,8 @@ const submit = () => {
             </option>
           </select>
         </div>
-        <p v-if="form.errors.category" class="mt-2 text-sm text-red-600">
-          {{ form.errors.category[0] }}
+        <p v-if="form.errors.service_category_id" class="mt-2 text-sm text-red-600">
+          {{ form.errors.service_category_id[0] }}
         </p>
       </div>
 

@@ -27,9 +27,16 @@ class ServiceRequest extends FormRequest
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:1',
             'duration' => 'required|integer|min:1',
-            'category' => 'required|in:service_categories',
+            'service_category_id' => 'required|exists:service_categories,id',
             'is_active' => 'boolean',
             'settings' => 'nullable|array',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'service_category_id' => 'category'
         ];
     }
 }
